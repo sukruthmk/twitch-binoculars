@@ -38,6 +38,14 @@ app.use(express.static('public'));
 // Passport middleware
 app.use(passport.initialize());
 
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
+
 // Passport config
 require('./auth/passport')(passport);
 
@@ -46,6 +54,16 @@ app.use(passport.session());
 const AuthRoutes = require('./routes/auth.route');
 
 app.use('/auth', AuthRoutes);
+
+// If user has an authenticated session, display it, otherwise display link to authenticate
+app.get('/', (req, res) => {
+  let user = {};
+  if (req.session && req.session.passport && req.session.passport.user) {
+    user = req.session.passport.user;
+  }
+  res.setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify(user));
+});
 
 // process.env.port is Heroku's port if we choose to deploy the app there
 const port = process.env.PORT || 8080;
