@@ -1,6 +1,6 @@
 {
     "TWITCH_CLIENT_ID": "bec7sgkr0zkl2rschjragocmj5yfiy",
     "TWITCH_SECRET": "0pi8ac0h6qvfmmut1udrjp0vkqxzvh",
-    "SESSION_SECRET": "",
+    "SESSION_SECRET": "eAClXcJDmo2aOaVKNV0VQcESqAQRSZs6",
     "CALLBACK_URL": "http://localhost:8080/auth/callback"
 }

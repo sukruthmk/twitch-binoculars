@@ -2,13 +2,10 @@
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const express = require('express');
-const graphqlHTTP = require('express-graphql');
 const helmet = require('helmet');
-const mongoose = require('mongoose');
 const morgan = require('morgan');
 const passport = require('passport');
-const schema = require('./graphql/schema');
-const session = require("express-session");
+const session = require('express-session');
 
 // define the Express app
 const app = express();
@@ -34,19 +31,19 @@ app.use(
     secret: config.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-  })
+  }),
 );
 app.use(passport.initialize());
 app.use(passport.session());
 
 const AuthRoutes = require('./routes/auth.route');
 
-app.use("/auth", AuthRoutes);
+app.use('/auth', AuthRoutes);
 
 // process.env.port is Heroku's port if we choose to deploy the app there
 const port = process.env.PORT || 8080;
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
-  console.log(`Server is up and running on port number ${port}`);
+  console.log(`Server is up and running at localhost:${port}`);
 });
