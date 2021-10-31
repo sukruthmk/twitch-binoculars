@@ -33,7 +33,14 @@ app.use(
     saveUninitialized: false,
   }),
 );
+app.use(express.static('public'));
+
+// Passport middleware
 app.use(passport.initialize());
+
+// Passport config
+require('./auth/passport')(passport);
+
 app.use(passport.session());
 
 const AuthRoutes = require('./routes/auth.route');
