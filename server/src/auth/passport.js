@@ -1,6 +1,7 @@
 const { OAuth2Strategy } = require('passport-oauth');
 const request = require('request');
 const config = require('../configs/auth.config.json');
+const UserModel = require('../models/user.model');
 
 // Override passport profile function to get user profile from Twitch API
 OAuth2Strategy.prototype.userProfile = (accessToken, done) => {
@@ -35,19 +36,10 @@ module.exports = (passport) => {
         callbackURL: config.CALLBACK_URL,
         state: true,
       },
-      (accessToken, refreshToken, profile, done) => {
-        console.log('accessToken', accessToken);
-        // eslint-disable-next-line no-param-reassign
-        profile.accessToken = accessToken;
-        // eslint-disable-next-line no-param-reassign
-        profile.refreshToken = refreshToken;
-
-        // Securely store user profile in your DB
-        // User.findOrCreate(..., function(err, user) {
-        //  done(err, user);
-        // });
-
-        done(null, profile);
+      async (accessToken, refreshToken, profile, done) => {
+        const userProfile = { ...profile, accessToken, refreshToken };
+        await UserModel.insert(userProfile);
+        done(null, userProfile);
       },
     ),
   );

@@ -11,8 +11,8 @@ exports.getConnection = (callback) => {
   // eslint-disable-next-line consistent-return
   pool.getConnection((err, conn) => {
     if (err) {
-      return callback(err);
+      throw new Error('Unable to connect to database!');
     }
-    callback(err, conn);
+    callback(conn);
   });
 };
