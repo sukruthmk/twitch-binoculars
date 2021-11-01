@@ -12,3 +12,7 @@ yarn-error.log*
 
 # OS
 .DS_Store
+
+# Configs
+src/configs/db.config.json
+src/configs/auth.config.json
