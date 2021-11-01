@@ -1,10 +1,12 @@
+import config from '../configs/db.config.json';
+
 const mysql = require('mysql');
 
 const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'me',
-  password: 'secret',
-  database: 'my_db',
+  host: config.DB_HOST,
+  user: config.DB_USER,
+  password: config.DB_PASSWORD,
+  database: config.DB_DATABASE,
 });
 
 exports.getConnection = (callback) => {
