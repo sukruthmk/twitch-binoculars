@@ -1,0 +1,1 @@
+export const TWITCH_AUTH_URL = 'http://localhost:8080/auth/login'
