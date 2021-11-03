@@ -4,7 +4,9 @@ const CommonUtils = require('../utils/commonUtils');
 const StreamModel = require('../models/stream.model');
 
 const fetchStreams = async (params = {}) => {
-  const accessToken = 'kk2thqt0qo661uozsumjjzrpexl9c8';
+  // TODO: Need fetch and update the token using api
+  // Also implement refresh token after it expires
+  const accessToken = 'kafv1zbgpjv1gqk7fh19g8qswxa5dg';
   try {
     const response = await got({
       url: 'https://api.twitch.tv/helix/streams',

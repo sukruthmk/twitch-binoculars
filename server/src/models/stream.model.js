@@ -24,7 +24,6 @@ const insert = async (stream) => new Promise((resolve) => {
       [stream_id, game_id, game_name, viewer_count, title, user_name, user_id],
       async (insertError) => {
         if (insertError) {
-          console.log(insertError);
           throw new Error('Unable to add stream!');
         }
         resolve(true);
