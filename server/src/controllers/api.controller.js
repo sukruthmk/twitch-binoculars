@@ -30,6 +30,16 @@ const getStreamsWithSameViewCount = async (req, res) => {
   res.json(result);
 };
 
+const getTop100StreamsASC = async (req, res) => {
+  const result = await StreamModel.getTop100StreamsASC();
+  res.json(result);
+};
+
+const getTop100StreamsDESC = async (req, res) => {
+  const result = await StreamModel.getTop100StreamsDESC();
+  res.json(result);
+};
+
 module.exports = {
   getStreamsPerGame,
   getHighestViewerPerGame,
@@ -37,4 +47,6 @@ module.exports = {
   getEvenViewerStreams,
   getOddViewerStreams,
   getStreamsWithSameViewCount,
+  getTop100StreamsASC,
+  getTop100StreamsDESC,
 };
