@@ -53,7 +53,7 @@ const init = async () => {
     try {
       await StreamModel.insert(stream);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   });
 };
