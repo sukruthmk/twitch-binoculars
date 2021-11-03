@@ -31,6 +31,12 @@ Navigate to client folder and install node modules first
 npm install
 ```
 
+## Mysql
+import the database using this command
+```sh
+mysqldump -u mysql_user -p DATABASE_NAME < dump.sql
+```
+
 # Running the application
 ## Server
 First start the server using this command
@@ -53,3 +59,6 @@ We can schedule a node-cron to fetch and update the database with new streams us
 ```sh
 npm run cron
 ```
+> With current implementation accessToken needs to be configured in the `streamsProcessor.js` file manually then only this database update will work.
+
+
