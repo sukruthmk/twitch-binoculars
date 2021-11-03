@@ -34,7 +34,25 @@ const insert = async (stream) => new Promise((resolve) => {
   });
 });
 
+const getStreamsPerGame = async () => new Promise((resolve) => {
+  mysql.getConnection(async (mclient) => {
+    const statement = 'SELECT game_id, ANY_VALUE(game_name) AS game_name, count(*) AS count FROM streams GROUP BY game_id ORDER BY count DESC';
+    await mclient.query(
+      statement,
+      [],
+      async (queryError, result) => {
+        if (queryError) {
+          throw new Error('Unable to query getStreamsPerGame');
+        }
+        resolve(result);
+      },
+    );
+    mclient.release();
+  });
+});
+
 module.exports = {
   insert,
   deleteAllStreams,
+  getStreamsPerGame,
 };

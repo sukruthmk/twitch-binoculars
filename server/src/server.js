@@ -52,8 +52,10 @@ require('./auth/passport')(passport);
 app.use(passport.session());
 
 const AuthRoutes = require('./routes/auth.route');
+const APIRoutes = require('./routes/api.route');
 
 app.use('/auth', AuthRoutes);
+app.use('/api', APIRoutes);
 
 // If user has an authenticated session, display it, otherwise display link to authenticate
 app.get('/', (req, res) => {
