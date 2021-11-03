@@ -67,7 +67,7 @@ const getMedianViewerCount = async () => new Promise((resolve) => {
       if (queryError) {
         throw new Error('Unable to query getMedianViewerCount');
       }
-      resolve(result[0]);
+      resolve(result);
     });
     mclient.release();
   });
@@ -127,7 +127,7 @@ const getTop100StreamsDESC = async () => new Promise((resolve) => {
 
 const getStreamsWithSameViewCount = async () => new Promise((resolve) => {
   mysql.getConnection(async (mclient) => {
-    const statement = 'SELECT * FROM streams WHERE viewer_count IN (SELECT viewer_count FROM streams GROUP BY viewer_count HAVING count(*) > 1)';
+    const statement = 'SELECT * FROM streams WHERE viewer_count IN (SELECT viewer_count FROM streams GROUP BY viewer_count HAVING count(*) > 1) ORDER BY viewer_count DESC';
     await mclient.query(statement, [], async (queryError, result) => {
       if (queryError) {
         throw new Error('Unable to query getEvenViewerStreams');
