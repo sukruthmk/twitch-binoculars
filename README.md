@@ -61,6 +61,9 @@ npm run cron
 ```
 > With current implementation accessToken needs to be configured in the `streamsProcessor.js` file manually then only this database update will work.
 
+# Demo video
+Checkout the demo video in youtube
+[https://youtu.be/IPijf86Vbdk](https://youtu.be/IPijf86Vbdk)
 
 # Screenshots
 ![Screenshot](https://raw.githubusercontent.com/sukruthmk/twitch-binoculars/main/screenshots/1.png)
