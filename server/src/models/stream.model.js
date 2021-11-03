@@ -9,6 +9,7 @@ const deleteAllStreams = async () => new Promise((resolve) => {
       }
       resolve(true);
     });
+    mclient.release();
   });
 });
 
@@ -29,6 +30,7 @@ const insert = async (stream) => new Promise((resolve) => {
         resolve(true);
       },
     );
+    mclient.release();
   });
 });
 

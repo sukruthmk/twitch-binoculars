@@ -41,6 +41,12 @@ const init = async () => {
   const allStreams = await getAllStreams(0);
   CommonUtils.shuffleArray(allStreams);
 
+  // delete existing streams
+  if (allStreams.length > 0) {
+    await StreamModel.deleteAllStreams();
+  }
+
+  // update the latest streams to database
   allStreams.forEach(async (stream) => {
     await StreamModel.insert(stream);
   });
