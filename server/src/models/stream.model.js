@@ -37,16 +37,38 @@ const insert = async (stream) => new Promise((resolve) => {
 const getStreamsPerGame = async () => new Promise((resolve) => {
   mysql.getConnection(async (mclient) => {
     const statement = 'SELECT game_id, ANY_VALUE(game_name) AS game_name, count(*) AS count FROM streams GROUP BY game_id ORDER BY count DESC';
-    await mclient.query(
-      statement,
-      [],
-      async (queryError, result) => {
-        if (queryError) {
-          throw new Error('Unable to query getStreamsPerGame');
-        }
-        resolve(result);
-      },
-    );
+    await mclient.query(statement, [], async (queryError, result) => {
+      if (queryError) {
+        throw new Error('Unable to query getStreamsPerGame');
+      }
+      resolve(result);
+    });
+    mclient.release();
+  });
+});
+
+const getHighestViewerPerGame = async () => new Promise((resolve) => {
+  mysql.getConnection(async (mclient) => {
+    const statement = 'SELECT game_id, ANY_VALUE(game_name) AS game_name, MAX(viewer_count) AS max_viewer_count FROM streams GROUP BY game_id ORDER BY max_viewer_count DESC;';
+    await mclient.query(statement, [], async (queryError, result) => {
+      if (queryError) {
+        throw new Error('Unable to query getHighestViewerPerGame');
+      }
+      resolve(result);
+    });
+    mclient.release();
+  });
+});
+
+const getMedianViewerCount = async () => new Promise((resolve) => {
+  mysql.getConnection(async (mclient) => {
+    const statement = 'SELECT x.viewer_count from streams x, streams y GROUP BY x.viewer_count HAVING SUM(SIGN(1-SIGN(y.viewer_count-x.viewer_count)))/COUNT(*) > .5 LIMIT 1';
+    await mclient.query(statement, [], async (queryError, result) => {
+      if (queryError) {
+        throw new Error('Unable to query getMedianViewerCount');
+      }
+      resolve(result[0]);
+    });
     mclient.release();
   });
 });
@@ -55,4 +77,6 @@ module.exports = {
   insert,
   deleteAllStreams,
   getStreamsPerGame,
+  getHighestViewerPerGame,
+  getMedianViewerCount,
 };
