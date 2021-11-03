@@ -7,7 +7,8 @@
         "build": "babel src/ -d lib --copy-files",
         "lint": "./node_modules/.bin/eslint --fix ./src",
         "start": "concurrently \"npm run build -- --watch\" \"nodemon lib/server.js\"",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "cron": "node src/cron/scheduler.js"
     },
     "author": "Sukruth M K",
     "license": "MIT",

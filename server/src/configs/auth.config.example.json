@@ -1,0 +1,7 @@
+{
+    "TWITCH_CLIENT_ID": "",
+    "TWITCH_SECRET": "",
+    "SESSION_SECRET": "",
+    "CALLBACK_URL": "",
+    "REDIRECT_CLIENT_URL": ""
+}
