@@ -50,7 +50,11 @@ const init = async () => {
 
   // update the latest streams to database
   allStreams.forEach(async (stream) => {
-    await StreamModel.insert(stream);
+    try {
+      await StreamModel.insert(stream);
+    } catch (err) {
+      console.log(err)
+    }
   });
 };
 

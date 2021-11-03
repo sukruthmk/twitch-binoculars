@@ -13,7 +13,7 @@ const deleteAllStreams = async () => new Promise((resolve) => {
   });
 });
 
-const insert = async (stream) => new Promise((resolve) => {
+const insert = async (stream) => new Promise((resolve, reject) => {
   const {
     id: stream_id, game_id, game_name, viewer_count, title, user_name, user_id,
   } = stream;
@@ -24,7 +24,7 @@ const insert = async (stream) => new Promise((resolve) => {
       [stream_id, game_id, game_name, viewer_count, title, user_name, user_id],
       async (insertError) => {
         if (insertError) {
-          throw new Error('Unable to add stream!');
+          reject(new Error('Unable to add stream!'));
         }
         resolve(true);
       },
