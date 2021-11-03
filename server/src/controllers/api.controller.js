@@ -15,8 +15,26 @@ const getMedianViewerCount = async (req, res) => {
   res.json(result);
 };
 
+const getEvenViewerStreams = async (req, res) => {
+  const result = await StreamModel.getEvenViewerStreams();
+  res.json(result);
+};
+
+const getOddViewerStreams = async (req, res) => {
+  const result = await StreamModel.getOddViewerStreams();
+  res.json(result);
+};
+
+const getStreamsWithSameViewCount = async (req, res) => {
+  const result = await StreamModel.getStreamsWithSameViewCount();
+  res.json(result);
+};
+
 module.exports = {
   getStreamsPerGame,
   getHighestViewerPerGame,
   getMedianViewerCount,
+  getEvenViewerStreams,
+  getOddViewerStreams,
+  getStreamsWithSameViewCount,
 };
